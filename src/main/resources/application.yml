@@ -1,0 +1,21 @@
+spring:
+  thymeleaf:
+    check-template: false
+    check-template-location: false
+    prefix: /WEB-INF/html/view/
+    suffix: .html
+    cache: false
+    encoding: UTF-8
+    mode: HTML
+    template-resolver-order: 0
+  mvc:
+    servlet:
+      path: /
+    view:
+      prefix: /WEB-INF/html/view/
+      suffix: .html
+
+server:
+  port: 80
+  servlet:
+    context-path: /
