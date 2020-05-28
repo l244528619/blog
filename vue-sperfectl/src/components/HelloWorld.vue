@@ -42,10 +42,10 @@
            <!-- <i class="el-icon-bicycle"></i> -->
         </div>
         <div class="centerCard">
-          <el-carousel :interval="4000" type="card" height="500px">
-            <el-carousel-item v-for="item in cardArr" :key="item">
-              <img :src="item.imgCard" alt="" width="641px" height="346px">
-              <h3 class="medium">{{ item.name }}</h3>
+          <el-carousel :interval="4000" type="card" height="700px">
+            <el-carousel-item v-for="item in cardArr" :key="item.id">
+              <img :src="item.imgCard" alt="" width="904px">
+              <h2 class="medium">{{ item.name }}</h2>
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -113,19 +113,20 @@ header .headerNav {
 }
 /* nav */
 nav.navBackground {
-  height: 970px;
+  height: 100%;
   background-image: url("../assets/img/headerbackground.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right bottom;
   display: flex;
   z-index: 9999;
+  align-content: flex-end;
 }
 
 .navBackground .navImage {
-  padding-top: 140px;
+  padding-top: 150px;
   flex: 1;
-  margin-left: 380px;
+  margin-left: 20%;
 }
 .img {
   animation: img 2s ease 0s 1;
@@ -134,7 +135,7 @@ nav.navBackground {
 
 @keyframes img {
   from {
-    margin-left: -380px;
+    margin-left: -20%;
   }
   to {
     margin-left: 0px;
@@ -142,7 +143,7 @@ nav.navBackground {
 }
 @-webkit-keyframes img {
   from {
-    margin-left: -380px;
+    margin-left: -20%;
   }
   to {
     margin-left: 0px;
@@ -167,9 +168,10 @@ nav.navBackground {
   background:rgba(220, 246, 248, 0.3); ;
   margin-bottom: 1500px;
   text-align: center;
-  font-family: "方正舒体";
+  /* font-family: "方正舒体"; */
 }
 .centerP {
+  
   margin-bottom: 100px;
 }
 .centerP p {
@@ -177,16 +179,21 @@ nav.navBackground {
   color: #475669;
 }
 .centerP .centerEssay{
+  font-family: "方正舒体";
   margin-bottom: 20px;
   font-size: 55px;
   color: #666;
  
 }
-  .el-carousel__item h3 {
+.el-carousel__item {
+  background: rgba(230, 250, 252, 0.8);
+}
+  .el-carousel__item h2 {
+    text-align: center;
     color: #333;
-    font-size: 14px;
+    /* font-size: 20px; */
     /* opacity: 0.75; */
-    margin: 10px;
+    margin: 50px;
   }
   
 </style>
