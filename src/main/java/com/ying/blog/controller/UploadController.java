@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @version $ 2020年05月24日
  */
 @Controller
-@RequestMapping("upload")
+@RequestMapping("api/upload")
 public class UploadController {
 
     @RequestMapping("index")
