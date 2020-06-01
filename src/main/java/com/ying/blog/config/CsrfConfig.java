@@ -1,7 +1,3 @@
-/**
- * Chsi
- * Created on 2020年06月01日
- */
 package com.ying.blog.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -11,10 +7,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-/**
- * @author lil <a href="mailto:lil@chsi.com.cn">lil</a>
- * @version $
- */
 @Configuration
 public class CsrfConfig {
 

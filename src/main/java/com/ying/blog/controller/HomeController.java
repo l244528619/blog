@@ -1,7 +1,3 @@
-/**
- * Chsi
- * Created on 2020年05月20日
- */
 package com.ying.blog.controller;
 
 import com.ying.blog.pojo.UserData;

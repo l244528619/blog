@@ -1,7 +1,3 @@
-/**
- * Chsi
- * Created on 2020年05月29日
- */
 package com.ying.blog.interceptor;
 
 import com.ying.blog.pojo.UserData;
@@ -11,10 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-/**
- * @author lil <a href="mailto:lil@chsi.com.cn">lil</a>
- * @version $
- */
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 

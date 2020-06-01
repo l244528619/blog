@@ -1,7 +1,3 @@
-/**
- * Chsi
- * Created on 2020年05月24日
- */
 package com.ying.blog.controller;
 
 import java.util.HashMap;
@@ -11,10 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * @author lil <a href="mailto:lil@chsi.com.cn">lil</a>
- * @version $ 2020年05月24日
- */
 @Controller
 @RequestMapping("api/upload")
 public class UploadController {
