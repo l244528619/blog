@@ -5,22 +5,33 @@
         <img class="img" :src="navimg" />
       </div>
 
-      <div class="navTable">
+      <div class = "navTable">
         <div class="navTab">
           <div class="useName">用户名密码登录</div>
-          <el-form :model="ruleForm"  :rules="rules" ref="ruleForm">
-            <el-form-item prop="name">
-              <el-input v-model="ruleForm.name" autocomplete="off" placeholder="用户名登录"></el-input>
+          <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+            <el-form-item prop="userName">
+              <el-input
+                v-model="ruleForm.userName"
+                prefix-icon="el-icon-s-custom"
+                autocomplete="off"
+                placeholder="请输入用户名"
+              ></el-input>
             </el-form-item>
-            <el-form-item prop="pass">
-              <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="密码"></el-input>
+            <el-form-item prop="passWord">
+              <el-input
+                type="password"
+                prefix-icon="el-icon-shopping-bag-1"
+                v-model="ruleForm.passWord"
+                autocomplete="off"
+                placeholder="请输入密码"
+              ></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="text" >自动登录</el-button>
-              <el-button type="text" >忘记密码？</el-button>
+              <el-button type="text">自动登录</el-button>
+              <el-button type="text">忘记密码？</el-button>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+              <el-button type="primary" @click="login('ruleForm')">登录</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -34,51 +45,49 @@ export default {
   name: "login",
   data() {
     //   用户名限制
-    var validateUsername = (rule, value, callback)=> {
-      if (value.length < 5) {
+    var validateUsername = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("请输入用户名"));
+      } else if (value.length < 5) {
         return callback(new Error("用户名不得小于5个字符!"));
       } else {
         callback();
       }
-    }
+    };
     //密码
     var validatePass = (rule, value, callback) => {
-      if (value.length < 6 || value.length > 18) {
-        return callback(new Error("用户名不得小于6个或大于20个字符!"));
+      if (!value) {
+        return callback(new Error("请输入用户名"));
+      } else if (value.length < 6 || value.length > 18) {
+        return callback(new Error("密码不得小于6个或大于20个字符!"));
       } else {
         callback();
       }
     };
-
-    // var validateEmail = (rule, value, callback) => {
-    //   const emailReg = /^(([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5}){1,25})$/;
-    //   if (!value) {
-    //     return callback(new Error("邮箱不能为空!!"));
-    //   }
-    //   setTimeout(() => {
-    //     if (!emailReg.test(value)) {
-    //       return callback(new Error("邮箱格式错误"));
-    //     } else {
-    //       callback();
-    //     }
-    //   }, 100);
-    // };
 
     return {
       logoImg: require("../assets/img/logo.png"),
       navimg: require("../assets/img/header.png"),
       ruleForm: {
-        pass: "",
-        name: ""
+        passWord: "",
+        userName: "",
       },
+      //表单验证规则对象
       rules: {
-        pass: [{ required: true, validator: validatePass, trigger: "blur" }],
-        name: [{  required: true, validator: validateUsername, trigger: "blur" }]
+        passWord: [
+          { required: true, validator: validatePass, trigger: "blur" }
+        ],
+        userName: [
+          { required: true, validator: validateUsername, trigger: "blur" }
+        ]
       }
     };
   },
+  mounted(){
+      this.getLogin();
+  },
   methods: {
-    submitForm(formName) {
+    login(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           alert("submit!");
@@ -88,8 +97,15 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    getLogin(){
+      var that =this;
+      this.utils.get("/api/currentLoginUser",{},
+      function(res){
+        
+           console.log(res);
+        }
+        
+      )
     }
   }
 };
