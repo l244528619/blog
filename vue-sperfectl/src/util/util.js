@@ -13,31 +13,37 @@ http://47.98.226.42/login?userName=admin&password=123456 这个是登录接口
 http://47.98.226.42/logout 这个接口是退出登录 */
 
 var utils = {
-    baseurl: 'http://47.98.226.42/',
-    get: function(url, param, callback) {
-        axios.get(this.baseurl + url, { params: param }).then(function(res) {
-            callback(res.data)
-        })
-    },
-    post: function(url, param, callback) {
-        var params = new URLSearchParams()
+  baseurl: 'http://47.98.226.42/',
+  get: function (url, param, callback) {
+    axios.get(this.baseurl + url, {
+      params: param, headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "X-Requested-With,Content-Type",
+        "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS"
+      }
+    }).then(function (res) {
+      callback(res.data)
+    })
+  },
+  post: function (url, param, callback) {
+    var params = new URLSearchParams()
 
-        for (var i in param) {
-            if (typeof param[i] !== 'object') {
-                params.append(i, param[i])
-            } else {
-                for (var j in param[i]) {
-                    if (j === 'id') {
-                        params.append(i + '.' + j, param[i][j])
-                        break
-                    }
-                }
-            }
+    for (var i in param) {
+      if (typeof param[i] !== 'object') {
+        params.append(i, param[i])
+      } else {
+        for (var j in param[i]) {
+          if (j === 'id') {
+            params.append(i + '.' + j, param[i][j])
+            break
+          }
         }
-        axios.post(this.baseurl + url, params).then(function(res) {
-            callback(res.data)
-        })
-    },
+      }
+    }
+    axios.post(this.baseurl + url, params).then(function (res) {
+      callback(res.data)
+    })
+  },
 //     getTime2Time: function($time1, $time2) {
 //         var time1 = arguments[0]
 //         var time2 = arguments[1]
@@ -103,5 +109,5 @@ var utils = {
 //         return true
 //     }
 
- }
+}
 export default utils
