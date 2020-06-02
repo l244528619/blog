@@ -30,7 +30,7 @@
               <el-checkbox v-model="checked">自动登录</el-checkbox>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" @click="login"   >登录</el-button>
+              <el-button type="primary" @click="login">登录</el-button>
               <!-- :plain="plain" -->
             </el-form-item>
             <el-form-item>
@@ -45,12 +45,10 @@
 </template>
 
 <script>
-
-import Home from '@/components/Home/home'
-import User from '@/components/UserPage/user'
+import Home from "@/components/Home/home";
+import User from "@/components/UserPage/user";
 
 export default {
-
   name: "login",
   data() {
     //   用户名限制
@@ -85,7 +83,6 @@ export default {
       rules: {
         password: [
           { required: true, validator: validatePass, trigger: "blur" }
-          
         ],
         userName: [
           { required: true, validator: validateUsername, trigger: "blur" }
@@ -93,7 +90,7 @@ export default {
       },
       checked: false,
       message: "",
-      flag: "",
+      flag: ""
       // plain:true
     };
   },
@@ -102,19 +99,14 @@ export default {
   },
   methods: {
     login() {
-      //  if(this.plain = this.flag) {
-      //        this.$message({ dangerouslyUseHTMLString: true, message: '<h1>{{this.message}}</h1>'});
-      //      }
-      //  console.log("成功",this.flag)
-     
       this.$refs.ruleForm.validate(valid => {
         if (valid) {
-           this.getLogin(this.ruleForm.userName, this.ruleForm.password);
-           console.log("成功",this.flag)
+          this.getLogin(this.ruleForm.userName, this.ruleForm.password);
+          console.log("成功", this.flag);
         } else {
-           this.getLogin(this.ruleForm.userName, this.ruleForm.password);
+          this.getLogin(this.ruleForm.userName, this.ruleForm.password);
           // console.log("失败")
-           console.log("失败",this.flag)
+          console.log("失败", this.flag);
           return false;
         }
       });
@@ -127,32 +119,34 @@ export default {
         function(res) {
           that.message = res.msg;
           that.flag = res.flag;
-          if( res.flag) {
-            console.log(that.message,"true")
-            that.getUaerOrAdmin(userName)
-          }else {
-             console.log(that.message, "false")
-             alert(that.message, "false")
-
-             
-          }
+          if (res.flag) {
          
+            // window.localStorage.setItem("token", res.token);
+            // console.log(res.data.token)
+            console.log(that.message, "true");
+            that.getUaerOrAdmin(userName); //页面跳转
+          } else {
+            console.log(that.message, "false");
+            alert(that.message, "false");
+          }
         }
       );
     },
     // user 和 admin页面跳转
-    getUaerOrAdmin(useName){
-      if(this.ruleForm.userName = "admin"){
-        console.log(this.ruleForm.userName )
-        this.$router.push({path: '/home', query: { username : this.ruleForm.userName }})
-        console.log(this.ruleForm.userName )
-      }else {
-        this.$router.push("/user")
+    getUaerOrAdmin(useName) {
+      if ((this.ruleForm.userName = "admin")) {
+        console.log(this.ruleForm.userName);
+        this.$router.push({
+          path: "/home",
+          query: { username: this.ruleForm.userName }
+        });
+        console.log(this.ruleForm.userName);
+      } else {
+        this.$router.push("/user");
       }
-    },
-
+    }
   },
-   components:{
+  components: {
     Home,
     User
   }

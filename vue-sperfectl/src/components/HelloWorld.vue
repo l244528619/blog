@@ -10,10 +10,9 @@
           <el-button icon="el-icon-edit" type="text"></el-button>
           <el-button icon="el-icon-check" type="text"></el-button>
           <el-button icon="el-icon-message" type="text"></el-button>
-          <el-button type="text" @click="login">登录</el-button>
+          <el-button v-show="loginShow" type="text" @click="login">登录</el-button>
         </el-row>
       </div>
-      
     </header>
     <nav class="navBackground">
       <div class="navImage">
@@ -56,13 +55,14 @@
 </template>
 
 <script>
-import Login from '@/components/login'
+import Login from "@/components/login";
 export default {
   name: "HelloWorld",
   data() {
     return {
       logoImg: require("../assets/img/logo.png"),
       navimg: require("../assets/img/header.png"),
+      loginShow:true,
       // tab
       cardArr: [
         {
@@ -87,18 +87,32 @@ export default {
             "清浅池塘边　重生破土的冲动 天地正玲珑　殡葬了飞虫 迢迢河汉间　有磷火坠地如彗锋 奢望着　能生死相拥",
           imgCard: require("../assets/img/yinlin.jpg")
         }
-      ],
+      ]
     };
   },
-  methods:{
-    login(){
-      this.$router.push('/login')
+  mounted() {
+    this.getLogin();
+  },
+  methods: {
+    getLogin() {
+      var that = this;
+      this.utils.get("/currentLoginUser", {}, function(res) {
+        console.log(res);
+        if(res.flag) {
+           that.loginShow = false;
+          
+        }else {
+          that.loginShow = true;
+        }
+      });
+    },
+    login() {
+      this.$router.push("/login");
     }
   },
-  components:{
+  components: {
     Login
   }
-  
 };
 </script>
 

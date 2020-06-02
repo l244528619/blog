@@ -13,7 +13,7 @@ http://47.98.226.42/login?userName=admin&password=123456 这个是登录接口
 http://47.98.226.42/logout 这个接口是退出登录 */
 
 var utils = {
-  baseurl: 'http://47.98.226.42/',
+  baseurl: 'http://47.98.226.42',
   get: function (url, param, callback) {
     axios.get(this.baseurl + url, {
       params: param, headers: {
@@ -22,6 +22,7 @@ var utils = {
         "Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS"
       }
     }).then(function (res) {
+      console.log(res)
       callback(res.data)
     })
   },
