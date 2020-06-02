@@ -50,7 +50,9 @@ public class HomeController extends BaseController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("user", new UserData(userName, password));
-        return success("登录成功");
+        UserData userData = new UserData();
+        userData.setUserName(userName);
+        return success(userData);
     }
 
     @ResponseBody

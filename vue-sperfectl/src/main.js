@@ -7,17 +7,17 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import axios from 'axios';
 import utils from '@/util/util.js'
-import qs from 'qs' // qs 用来解决vue中post请求以 a=a&b=b 的格式
+import store from './store';
 
 Vue.config.productionTip = false;
 Vue.prototype.utils = utils;
 Vue.use(ElementUI);
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   axios,
+  store,
   components: { App },
   template: '<App/>'
 })

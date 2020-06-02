@@ -14,8 +14,9 @@ http://47.98.226.42/logout 这个接口是退出登录 */
 
 var utils = {
   baseurl: 'http://47.98.226.42',
+  //  baseurl: 'http://localhost',
   get: function (url, param, callback) {
-    axios.get(this.baseurl + url, {
+    axios.get(this.baeurl + url, {
       params: param, headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "X-Requested-With,Content-Type",
