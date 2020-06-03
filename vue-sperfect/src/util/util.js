@@ -17,7 +17,7 @@ var utils = {
   //  baseurl: 'http://localhost',
   get: function (url, param, callback) {
     console.log(url)
-    axios.get(this.baeurl + url, {
+    axios.get(this.baseurl + url, {
       params: param, headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "X-Requested-With,Content-Type",
