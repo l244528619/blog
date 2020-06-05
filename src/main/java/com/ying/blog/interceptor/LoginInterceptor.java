@@ -1,20 +1,30 @@
 package com.ying.blog.interceptor;
 
-import com.ying.blog.pojo.UserData;
+import com.ying.blog.token.TokenDto;
+import com.ying.blog.token.TokenManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
-public class LoginInterceptor implements HandlerInterceptor {
+public class LoginInterceptor implements HandlerInterceptor, Ordered {
+
+    @Override
+    public int getOrder() {
+        return 0;
+    }
+
+    @Autowired
+    private TokenManager tokenManager;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
-        UserData userData = (UserData) session.getAttribute("user");
-        if (userData == null) {
+        String token = request.getHeader("TOKEN");
+        TokenDto tokenDto = tokenManager.query(token);
+        if (tokenDto == null) {
             String requestType = request.getHeader("X-Requested-With");
             if ("XMLHttpRequest".equals(requestType)) {
                 response.setContentType("application/json;charset=UTF-8");

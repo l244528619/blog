@@ -11,8 +11,8 @@ public class UserData {
         this.password = password;
     }
 
-    public String userName;
-    public String password;
+    private String userName;
+    private String password;
 
     public String getUserName() {
         return userName;
@@ -29,6 +29,7 @@ public class UserData {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     @Override
     public String toString() {

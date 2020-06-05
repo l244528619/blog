@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no"/>
+    <title>Upload Test</title>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="shortcut icon" th:href="@{/common/image/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/common/iview/styles/iview.css}"/>
+    <script src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <div style="text-align: center;">
+        <h3>Upload</h3>
+        <input id="token" th:value="${token}">
+        <input type="button" onclick="testAPI()" value="测试获取当前用户"/>
+    </div>
+    <script>
+        function testAPI() {
+            $.ajax({
+                url: '/api/currentLoginUser',
+                type: 'post',
+                dataType: 'json',
+                data: {},
+                headers: {TOKEN: $("#token").val()},
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        }
+
+    </script>
+</div>
+</body>
+</html>
