@@ -21,7 +21,7 @@ public class YingRepository {
 
     static {
         List<UserData> userDatas = new ArrayList<>();
-        userDatas.add(new UserData("admin", "123456"));
+        userDatas.add(new UserData("admin", "123456", "18810112022"));
         database.put(UserData.class.getName(), userDatas);
     }
 
@@ -38,12 +38,25 @@ public class YingRepository {
         return null;
     }
 
-    public static void saveUser(String userName, String password) {
-        ((List<UserData>) database.get(UserData.class.getName())).add(new UserData(userName, password));
+    public static UserData getUserByMobile(String mobile) {
+        for (UserData userData : (List<UserData>) database.get(UserData.class.getName())) {
+            if (userData.getMobile().equals(mobile)) {
+                return userData;
+            }
+        }
+        return null;
     }
 
-    public static void updateUser(String userName, String password) {
+    public static void saveUser(String userName, String password, String mobile) {
+        ((List<UserData>) database.get(UserData.class.getName())).add(new UserData(userName, password, mobile));
+    }
+
+    public static void updateUserPassword(String userName, String password) {
         getUserByName(userName).setPassword(password);
+    }
+
+    public static void updateUserMobile(String userName, String mobile) {
+        getUserByName(userName).setMobile(mobile);
     }
 
     public static void deleteUser(String userName) {
