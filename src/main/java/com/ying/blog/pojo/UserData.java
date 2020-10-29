@@ -1,6 +1,6 @@
 package com.ying.blog.pojo;
 
-public class UserData {
+public class UserData extends BaseData {
 
     public UserData() {
 
