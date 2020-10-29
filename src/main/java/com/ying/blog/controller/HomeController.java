@@ -2,6 +2,7 @@ package com.ying.blog.controller;
 
 import static com.ying.blog.common.Constants.USER;
 
+import com.ying.blog.common.YingRepository;
 import com.ying.blog.pojo.UserData;
 import com.ying.blog.token.TokenDto;
 import com.ying.blog.token.TokenManager;
@@ -53,7 +54,7 @@ public class HomeController extends BaseController {
         if (StringUtils.isBlank(password)) {
             return error("密码不能为空");
         }
-        if (!userName.equals("admin") || !password.equals("123456")) {
+        if (!YingRepository.isValidUser(userName, password)) {
             return error("用户名或密码错误");
         }
         UserData userData = new UserData();

@@ -65,4 +65,13 @@ public class YingRepository {
             database.get(UserData.class.getName()).remove(data);
         }
     }
+
+    public static boolean isValidUser(String userName, String password) {
+        for (UserData userData : (List<UserData>) database.get(UserData.class.getName())) {
+            if (userData.getUserName().equals(userName) && userData.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
