@@ -22,24 +22,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version $
  */
 @Controller
-@RequestMapping("api/user")
 public class UserController extends BaseController {
 
     @ResponseBody
-    @RequestMapping("getAllUser")
+    @RequestMapping("/api/user/getAllUser")
     public Map index() {
         return success(YingRepository.getAllUser());
     }
 
     @ResponseBody
-    @RequestMapping("getUserByName")
+    @RequestMapping("/api/user/getUserByName")
     public Map getUserByName(@RequestParam String userName) {
         UserData userData = YingRepository.getUserByName(userName);
         return success(userData == null ? "" : userData);
     }
 
     @ResponseBody
-    @RequestMapping("saveUser")
+    @RequestMapping("/api/user/saveUser")
     public Map saveUser(@RequestParam String userName,
             @RequestParam String password,
             @RequestParam String mobile,
@@ -67,7 +66,7 @@ public class UserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping("updateUserPassword")
+    @RequestMapping("/user/updateUserPassword")
     public Map updateUserPassword(@RequestParam String userName, @RequestParam String password) {
         if (YingRepository.getUserByName(userName) == null) {
             return error("用户不存在");
@@ -77,7 +76,7 @@ public class UserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping("updateUserMobile")
+    @RequestMapping("/api/user/updateUserMobile")
     public Map updateUserMobile(@RequestParam String userName, @RequestParam String mobile) {
         if (YingRepository.getUserByName(userName) == null) {
             return error("用户不存在");

@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version $
  */
 @Controller
-@RequestMapping("api/captcha")
+@RequestMapping("captcha")
 public class CaptchaController extends BaseController {
 
     @ResponseBody
