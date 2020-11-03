@@ -6,11 +6,13 @@ package com.ying.blog.controller;
 
 import static com.ying.blog.common.Constants.SESSION_CAPTCHA_NAME;
 
+import com.ying.blog.common.YingCaptcha;
 import com.ying.blog.common.YingRepository;
 import com.ying.blog.pojo.UserData;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,21 +40,14 @@ public class UserController extends BaseController {
     }
 
     @ResponseBody
-    @RequestMapping("/api/user/saveUser")
+    @RequestMapping("/user/saveUser")
     public Map saveUser(@RequestParam String userName,
             @RequestParam String password,
             @RequestParam String mobile,
-            @RequestParam String captcha,
-            HttpServletRequest request,
-            HttpServletResponse response) {
-        String captSession = (String) request.getSession().getAttribute(SESSION_CAPTCHA_NAME);
-        boolean valid = StringUtils.equalsIgnoreCase(captSession, captcha);
+            @RequestParam String captcha) {
+        boolean valid = YingCaptcha.isValidCaptcha(captcha);
         if (!valid) {
             return error("验证码有误");
-        }
-        //如果验证成功且remove=true则清掉cookie
-        if (valid) {
-            request.getSession().removeAttribute(SESSION_CAPTCHA_NAME);
         }
 
         if (YingRepository.getUserByName(userName) != null) {

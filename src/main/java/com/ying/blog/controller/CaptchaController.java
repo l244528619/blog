@@ -6,6 +6,7 @@ package com.ying.blog.controller;
 
 import static com.ying.blog.common.Constants.SESSION_CAPTCHA_NAME;
 
+import com.ying.blog.common.YingCaptcha;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -28,7 +29,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("captcha")
 public class CaptchaController extends BaseController {
 
-    @ResponseBody
     @RequestMapping("getCaptcha")
     public void getCaptcha(HttpServletRequest request, HttpServletResponse response) {
         int width = 81;
@@ -44,7 +44,6 @@ public class CaptchaController extends BaseController {
         } catch (Exception Ex) {
         }
 
-        HttpSession session = request.getSession(true);
         // 在内存中创建图象
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
@@ -85,7 +84,7 @@ public class CaptchaController extends BaseController {
                     ID = "8888";
             }
 
-            request.getSession().setAttribute(SESSION_CAPTCHA_NAME,ID);
+            YingCaptcha.captchaSet.add(ID);
 
             // 将认证码显示到图象中
             g.setColor(Color.black);
